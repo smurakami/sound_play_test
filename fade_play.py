@@ -44,6 +44,7 @@ def main():
     if platform.system() == 'Darwin': # mac
         os.system("afplay %s" % dst)
     else:
+        volume = -4000
         os.system("omxplayer -o local --vol %d %s" % (volume, dst))
 
 
