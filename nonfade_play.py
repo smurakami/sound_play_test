@@ -36,7 +36,7 @@ def main():
     if platform.system() == 'Darwin': # mac
         os.system("afplay %s" % filename)
     else:
-        os.system("omxplayer -o local --vol %d %s" % (filename, volume))
+        os.system("omxplayer -o local --vol %d %s" % (volume, filename))
 
 
 if __name__ == "__main__":
