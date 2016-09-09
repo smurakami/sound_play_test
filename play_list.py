@@ -54,7 +54,7 @@ def main():
     while True:
         if stopped[0]:
             break
-        if counter % 29 == 0:
+        if counter % 7 == 0:
             filename = file_list[index % len(file_list)]
             proc = play(filename)
             index += 1

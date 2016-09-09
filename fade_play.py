@@ -38,7 +38,7 @@ def main():
     pygame.mixer.music.load(filename)
     pygame.mixer.music.set_volume(0)
 
-    duration = 30.0
+    duration = 10.0
     fade_in = 3.0
     fade_out = 3.0
 
@@ -67,6 +67,8 @@ def main():
         pygame.mixer.music.set_volume(vol)
 
         time.sleep(0.1)
+
+    pygame.mixer.music.stop()
 
 
 
