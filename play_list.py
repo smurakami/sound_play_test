@@ -56,6 +56,7 @@ def main():
             break
         if counter % 7 == 0:
             filename = file_list[index % len(file_list)]
+            print 'play', filename
             proc = play(filename)
             index += 1
         time.sleep(1)
