@@ -1,30 +1,8 @@
-from pydub import AudioSegment
-from pydub import playback
-import sys
-import os
-
-
-def main():
-    argv = sys.argv
-    if len(argv) < 4:
-        print "usage: python fade_play.py filename fade_in fade_out"
-        return
-
-    filename = argv[1]
-    fade_in = int(argv[2])
-    fade_out = int(argv[3])
-
-    a = AudioSegment.from_mp3(filename)[:10000]
-    playback.play(a.fade_in(fade_in).fade_out(fade_out))
-
-
-main()
-
-
-# import pygame.mixer
-# import time
+# from pydub import AudioSegment
+# from pydub import playback
 # import sys
 # import os
+
 
 # def main():
 #     argv = sys.argv
@@ -36,43 +14,38 @@ main()
 #     fade_in = int(argv[2])
 #     fade_out = int(argv[3])
 
-#     pygame.mixer.init()
-#     pygame.mixer.music.load(filename)
-#     pygame.mixer.music.set_volume(0)
-
-#     duration = 10.0
-#     fade_in = 3.0
-#     fade_out = 3.0
+#     a = AudioSegment.from_mp3(filename)[:10000]
+#     playback.play(a.fade_in(fade_in).fade_out(fade_out))
 
 
-#     start = time.time()
-#     pygame.mixer.music.stop()
-#     pygame.mixer.music.play(1) 
+# main()
 
-#     # force playing 
-#     while not pygame.mixer.music.get_busy():
-#         pygame.mixer.music.play(1) 
-#         time.sleep(0.1)
+import platform
+import time
+import sys
+import os
 
-#     while True:
-#         pos = time.time() - start
-#         if pos >= duration:
-#             break
+def main():
+    argv = sys.argv
+    if len(argv) < 4:
+        print "usage: python fade_play.py filename fade_in fade_out"
+        return
 
-#         if pos < fade_in:
-#             vol = pos/fade_in
-#         elif pos > duration - fade_out:
-#             vol = (duration - pos)/fade_out
-#         else:
-#             vol = 1.0
+    filename = argv[1]
 
-#         pygame.mixer.music.set_volume(vol)
+    dst = filename.replace(".mp3", "_fade.wav")
 
-#         time.sleep(0.1)
+    fade_in = int(argv[2]) / 1000
+    fade_out = int(argv[3]) / 1000
+    duration = 30
 
-#     pygame.mixer.music.stop()
+    os.system("sox %s %s fade t %d %d %d" % (filename, dst, fade_in, duration, fade_out))
+
+    if platform.system() == 'Darwin': # mac
+        os.system("afplay %s" % dst)
+    else:
+        os.system("omxplayer -o local --vol %d %s" % (volume, dst))
 
 
-
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()

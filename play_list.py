@@ -27,7 +27,7 @@ def play(filename):
     クロスフェードのためにさらにサブプロセスを生成している。
     raspberry piではうまく動かないので調整が必要。
     """
-    proc = subprocess.Popen('python %s/nonfade_play.py %s/%s 3000 3000' % (current_directory, current_directory, filename), shell=True)
+    proc = subprocess.Popen('python %s/fade_play.py %s/%s 3000 3000' % (current_directory, current_directory, filename), shell=True)
     return proc
 
 
@@ -54,7 +54,7 @@ def main():
     while True:
         if stopped[0]:
             break
-        if counter % 7 == 0:
+        if counter % 27 == 0:
             filename = file_list[index % len(file_list)]
             print 'play', filename
             proc = play(filename)
