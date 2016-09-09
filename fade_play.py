@@ -17,7 +17,9 @@ def main():
     a = AudioSegment.from_mp3(filename)[:10000]
     playback.play(a.fade_in(fade_in).fade_out(fade_out))
 
+
 main()
+
 
 # import pygame.mixer
 # import time
