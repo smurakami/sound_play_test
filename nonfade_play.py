@@ -30,7 +30,7 @@ def main():
 
     filename = argv[1]
 
-    volume = -500
+    volume = -4000
 
     
     if platform.system() == 'Darwin': # mac
