@@ -38,8 +38,9 @@ def main():
     fade_in = int(argv[2]) / 1000
     fade_out = int(argv[3]) / 1000
     duration = 30
+    rate = '16k'
 
-    os.system("sox %s %s fade t %d %d %d" % (filename, dst, fade_in, duration, fade_out))
+    os.system("sox %s %s rate %s fade t %d %d %d" % (filename, dst, rate, fade_in, duration, fade_out))
 
     if platform.system() == 'Darwin': # mac
         os.system("afplay %s" % dst)
